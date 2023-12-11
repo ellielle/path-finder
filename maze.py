@@ -1,4 +1,4 @@
-from canvas import Point
+from canvas import Point, Cell
 from time import sleep
 
 
@@ -17,12 +17,14 @@ class Maze:
     def _create_cells(self):
         if self.num_rows == 0 or self.num_cols == 0:
             raise Exception("Rows and Columns can't be 0")
-        # populate self._cells with lists of cells, each list being a column of Cell objects
-        # once populated, call _draw_cell() on each Cell
-        for i in range(self.num_cols):
-            self._cells[i].append([Point(0, 0), Point(0, 0)])
+        main_count = 0
+        for i in range(self.num_rows):
+            for j in range(self.num_cols):
+                self._cells[i].append(Cell(Point(0, 0), Point(0, 0), self.__win))
+                main_count += 1
 
-        raise Exception(self._cells)
+        # raise Exception(self._cells)
+        # self._cells = 25 (5x5), seems to be proper format
 
     def _draw_cell(self, cell, i, j):
         cell.point1 = Point(i, j)
@@ -32,4 +34,4 @@ class Maze:
 
     def _animate(self):
         self.__win.redraw()
-        sleep(0.05)
+        # sleep(0.05)
