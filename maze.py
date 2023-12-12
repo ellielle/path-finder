@@ -3,7 +3,7 @@ from time import sleep
 
 
 class Maze:
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None):
         self.__win = win
         self._x1 = x1
         self._y1 = y1
@@ -17,21 +17,29 @@ class Maze:
     def _create_cells(self):
         if self.num_rows == 0 or self.num_cols == 0:
             raise Exception("Rows and Columns can't be 0")
-        main_count = 0
-        for i in range(self.num_rows):
-            for j in range(self.num_cols):
-                self._cells[i].append(Cell(Point(0, 0), Point(0, 0), self.__win))
-                main_count += 1
+
+        # the row/column logic is backwards, see tests.py results
+
+        for i in range(self.num_cols):
+            for j in range(self.num_rows):
+                # raise Exception((i + 1) * self._x1)
+                point1 = Point((i + 1) * self._x1, (j + 1) * self._y1)
+                point2 = Point(
+                    ((i + 1) * self._x1) + self.cell_size_x,
+                    ((j + 1) * self._x1) + self.cell_size_y,
+                )
+                cell = Cell(point1, point2, self.__win)
+                self._cells[i].append(cell)
+                self._draw_cell(cell)
 
         # raise Exception(self._cells)
         # self._cells = 25 (5x5), seems to be proper format
 
-    def _draw_cell(self, cell, i, j):
-        cell.point1 = Point(i, j)
-        cell.point2 = Point(i + self.cell_size_x, j + self.cell_size_y)
+    def _draw_cell(self, cell):
         cell.draw("black")
-        # self._animate()
+        self._animate()
 
     def _animate(self):
-        self.__win.redraw()
-        # sleep(0.05)
+        if self.__win:
+            self.__win.redraw()
+            # sleep(0.02)

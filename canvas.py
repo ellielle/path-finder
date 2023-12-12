@@ -55,19 +55,20 @@ class Line:
 
 
 class Cell:
-    def __init__(self, point1, point2, window):
+    def __init__(self, point1, point2, win=None):
         # point1 is top left, point2 is bottom right
-        self.__win = window
-        self.x1 = point1.x
-        self.y1 = point1.y
-        self.x2 = point2.x
-        self.y2 = point2.y
+        self.__win = win
+        self.x1, self.y1 = point1.x, point1.y
+        self.x2, self.y2 = point2.x, point2.y
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
 
     def draw(self, fill_color="black"):
+        if not self.__win:
+            return
+
         if self.has_left_wall:
             self.__win.draw_line(
                 Line(Point(self.x1, self.y1), Point(self.x1, self.y2)), fill_color
@@ -86,6 +87,9 @@ class Cell:
             )
 
     def draw_move(self, to_cell, undo=False):
+        if not self.__win:
+            return
+
         center = Point((self.x1 + self.x2) / 2, (self.y1 + self.y2) / 2)
         center_to_cell = Point(
             (to_cell.x1 + to_cell.x2) / 2, (to_cell.y1 + to_cell.y2) / 2
