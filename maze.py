@@ -9,7 +9,7 @@ class Maze:
         self._y1 = y1
         self.num_rows = num_rows
         self.num_cols = num_cols
-        self._cells = [[] for _ in range(self.num_rows)]
+        self._cells = [[] for _ in range(self.num_cols)]
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
         self._create_cells()
@@ -26,7 +26,7 @@ class Maze:
                 point1 = Point((i + 1) * self._x1, (j + 1) * self._y1)
                 point2 = Point(
                     ((i + 1) * self._x1) + self.cell_size_x,
-                    ((j + 1) * self._x1) + self.cell_size_y,
+                    ((j + 1) * self._y1) + self.cell_size_y,
                 )
                 cell = Cell(point1, point2, self.__win)
                 self._cells[i].append(cell)
