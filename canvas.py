@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, Canvas, Widget
+from tkinter import Tk, BOTH, Canvas
 
 
 class Window:
@@ -9,7 +9,9 @@ class Window:
         self.width = width
         self.height = height
         self.title = self.__root
-        self.canvas = Canvas(self.__root, width=self.width, height=self.height)
+        self.canvas = Canvas(
+            master=self.__root, width=self.width, height=self.height, bg="white"
+        )
         self.canvas.pack(fill=BOTH, expand=True)
         self.is_running = False
 
@@ -64,27 +66,30 @@ class Cell:
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
+        self.visited = False
 
     def draw(self, fill_color="black"):
         if not self.__win:
             return
 
-        if self.has_left_wall:
-            self.__win.draw_line(
-                Line(Point(self.x1, self.y1), Point(self.x1, self.y2)), fill_color
-            )
-        if self.has_right_wall:
-            self.__win.draw_line(
-                Line(Point(self.x2, self.y1), Point(self.x2, self.y2)), fill_color
-            )
-        if self.has_top_wall:
-            self.__win.draw_line(
-                Line(Point(self.x1, self.y1), Point(self.x2, self.y1)), fill_color
-            )
-        if self.has_bottom_wall:
-            self.__win.draw_line(
-                Line(Point(self.x1, self.y2), Point(self.x2, self.y2)), fill_color
-            )
+        colors = [["white"], [fill_color]]
+
+        self.__win.draw_line(
+            Line(Point(self.x1, self.y1), Point(self.x1, self.y2)),
+            colors[int(self.has_left_wall)],
+        )
+        self.__win.draw_line(
+            Line(Point(self.x2, self.y1), Point(self.x2, self.y2)),
+            colors[int(self.has_right_wall)],
+        )
+        self.__win.draw_line(
+            Line(Point(self.x1, self.y1), Point(self.x2, self.y1)),
+            colors[int(self.has_top_wall)],
+        )
+        self.__win.draw_line(
+            Line(Point(self.x1, self.y2), Point(self.x2, self.y2)),
+            colors[int(self.has_bottom_wall)],
+        )
 
     def draw_move(self, to_cell, undo=False):
         if not self.__win:
@@ -96,11 +101,6 @@ class Cell:
         )
         color = "gray"
         if not undo:
-            color = "purple"
+            color = "red"
         line = Line(center, center_to_cell)
         line.draw(self.__win.canvas, color)
-
-        # Use the x/y coordinates of the 2 cells in question to decide how to draw the line connecting the two cells.
-
-        # is_to_cell_top_border = self.x1 < to_cell.x1 and self.y1
-        # if self.x1 < to_cell.x1 and self.x2 < to_cell.x2

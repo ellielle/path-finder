@@ -25,8 +25,7 @@ def draw_initial_grid(_win):
 
 def main():
     win = Window(800, 600)
-    maze = Maze(20, 20, 4, 2, 20, 20, win)
-    # draw_initial_grid(win)
+    Maze(20, 20, 12, 12, 20, 20, win, "testing")
     win.wait_for_close()
 
 
