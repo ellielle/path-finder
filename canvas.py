@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, Canvas
+from tkinter import BOTH, Canvas, Tk
 
 
 class Window:
@@ -53,7 +53,7 @@ class Line:
             fill=fill_color,
             width=2,
         )
-        canvas.pack()
+        canvas.pack(fill=BOTH, expand=True)
 
 
 class Cell:
