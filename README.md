@@ -6,7 +6,7 @@ A maze builder and solver in Python
 
 - python3
 
-- Tkinter (use `$ python -m tkinter` if unsure you have it installed, `sudo apt-get install tk-dev` if you don't)
+- Tkinter (use `$ python -m tkinter` if unsure you have it installed, `$ sudo apt-get install tk-dev` if you don't)
 
 ## Running
 
