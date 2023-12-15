@@ -10,7 +10,7 @@ A maze builder and solver in Python
 
 ## Running
 
-- Clone the repo `git@github.com/ellielle/path-finder.git`
+- Clone the repo `$ git clone git@github.com/ellielle/path-finder.git`
 
 - Run tests with `$ python3 tests.py`
 
