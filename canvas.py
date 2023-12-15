@@ -57,6 +57,20 @@ class Line:
 
 
 class Cell:
+    # class variable to keep track of undo color for the current undo route
+    undo_colors = [
+        "cyan",
+        "magenta",
+        "pink",
+        "orange",
+        "lime",
+        "deeppink",
+        "saddlebrown",
+        "deepskyblue",
+        "gold",
+    ]
+    current_color = undo_colors[-1]
+
     def __init__(self, point1, point2, win=None):
         # point1 is top left, point2 is bottom right
         self.__win = win
@@ -101,8 +115,13 @@ class Cell:
         center_to_cell = Point(
             (to_cell.x1 + to_cell.x2) / 2, (to_cell.y1 + to_cell.y2) / 2
         )
-        color = "gray"
+
+        # change the color for the duration of the undo route
+        # then prepare the next color
+        color = self.current_color
         if not undo:
+            self.current_color = self.undo_colors.pop()
+            self.undo_colors.insert(0, self.current_color)
             color = "red"
         line = Line(center, center_to_cell)
         line.draw(self.__win.canvas, color)
