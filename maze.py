@@ -15,7 +15,7 @@ class Maze:
         self._cells = [[] for _ in range(self.num_cols)]
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
-        self.__sleep_constant = 0.00
+        self.__sleep_constant = 0.03
         self._create_cells()
         if seed:
             random.seed(seed)

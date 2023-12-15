@@ -8,7 +8,6 @@ class Window:
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
         self.width = width
         self.height = height
-        self.title = self.__root
         self.canvas = Canvas(
             master=self.__root, width=self.width, height=self.height, bg="white"
         )
@@ -61,11 +60,10 @@ class Cell:
     undo_colors = [
         "cyan",
         "magenta",
-        "pink",
+        "blue",
         "orange",
         "lime",
-        "deeppink",
-        "saddlebrown",
+        "hotpink",
         "deepskyblue",
         "gold",
     ]
