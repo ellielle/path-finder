@@ -72,6 +72,7 @@ class Cell:
         if not self.__win:
             return
 
+        # draw with colors[0] for a missing wall, colors[1] for regular walls
         colors = [["white"], [fill_color]]
 
         self.__win.draw_line(
@@ -95,6 +96,7 @@ class Cell:
         if not self.__win:
             return
 
+        # get the center points between the cells to draw the line from
         center = Point((self.x1 + self.x2) / 2, (self.y1 + self.y2) / 2)
         center_to_cell = Point(
             (to_cell.x1 + to_cell.x2) / 2, (to_cell.y1 + to_cell.y2) / 2
