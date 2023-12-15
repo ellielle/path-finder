@@ -15,3 +15,13 @@ A maze builder and solver in Python
 - Run tests with `$ python3 tests.py`
 
 - Run `$ python3 main.py` and bask in the rainbow of failed routes
+
+## Running the executable
+
+### Windows
+
+Download and run `maze-solver.exe`. The window will need to be closed manually when finished.
+
+### Linux
+
+Download `main`, run with `$ ./main` in terminal.
